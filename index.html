@@ -145,14 +145,14 @@
 </head>
 <body>
   <!-- Background Music -->
-  <audio autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="https://soft-teal-cf2cuoe8a5-v85mmilts2.edgeone.app/Jeene%20Laga%20Hoon%20Lyrics%20%E2%80%93%20Ramaiya%20Vastavaiya%20(Atif%20Aslam)%20Rehte%20Ho%20Aake%20Jo%20Tum%20Paas%20MereTham%20Jaaye%20[zM4KnBRU4LY].mp3" type="audio/mpeg">
   </audio>
 
   <div class="container">
     <h1>Happy 4th Anniversary Mokshuu ❤️❤️❤️😘</h1>
     <p>
-      Our story began 6 years ago in 11th standard. I still remember the day I proposed to you during the corona days… and then waited almost 1.5 years for your reply. That wait changed my life in the most beautiful way. Because of you, I chose the path of CA… and today whatever small success I have, it’s all because of your inspiration and belief in me.
+      Our story began 6 years ago in 11th standard. I still remember the day I proposed to you during the corona days… and then waited almost 2 years for your reply. That wait changed my life in the most beautiful way. Because of you, I chose the path of CA… and today whatever small success I have, it’s all because of your inspiration and belief in me.
     </p>
     <div class="photo-section">
       <img src="https://raw.githubusercontent.com/Mit2306/4th-Anniversary.github.io/refs/heads/main/Main%20photo.png" alt="Our Photo" />
@@ -217,6 +217,20 @@
       }, 5000);
     }
     setInterval(createHeart, 300);
+
+    // Auto play music workaround
+    const audio = document.getElementById('bgMusic');
+    window.addEventListener('load', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay blocked, wait for first click
+          document.body.addEventListener('click', () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    });
   </script>
 </body>
 </html>
