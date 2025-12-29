@@ -13,6 +13,7 @@
       color: #333;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      position: relative;
     }
     .container {
       padding: 40px 20px;
@@ -103,15 +104,15 @@
 
     /* Heart balloon animation */
     .heart {
-      position: fixed;
+      position: absolute;
       width: 20px;
       height: 20px;
       background: red;
       transform: rotate(45deg);
-      left: 50%;
       bottom: -20px;
-      animation: floatUp 5s linear infinite;
+      animation: floatUp 5s linear forwards;
       z-index: 9999;
+      pointer-events: none;
     }
     .heart::before,
     .heart::after {
@@ -136,7 +137,7 @@
         opacity: 1;
       }
       100% {
-        transform: translateX(var(--x)) translateY(-100vh) rotate(45deg);
+        transform: translateX(var(--x)) translateY(-120vh) rotate(45deg);
         opacity: 0;
       }
     }
@@ -144,7 +145,7 @@
 </head>
 <body>
   <iframe width="0" height="0"
-  src="https://www.youtube.com/watch?v=ct3TycKb8dE&list=RDct3TycKb8dE&start_radio=1">
+    src="https://www.youtube.com/watch?v=ct3TycKb8dE&list=RDct3TycKb8dE&start_radio=1">
   </iframe>
 
   <div class="container">
@@ -190,7 +191,7 @@
     </div>
   </div>
 
-  <!-- Scroll Animation Script -->
+  <!-- Scripts -->
   <script>
     const items = document.querySelectorAll('.timeline-item');
     const observer = new IntersectionObserver((entries) => {
@@ -208,6 +209,7 @@
       heart.className = 'heart';
       heart.style.left = Math.random() * window.innerWidth + 'px';
       heart.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+      heart.style.bottom = '-20px';
       document.body.appendChild(heart);
       setTimeout(() => {
         heart.remove();
